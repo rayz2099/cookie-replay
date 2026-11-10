@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Cookie Relay",
+  "description": "在开发环境之间保存和迁移 Cookie。",
+  "version": "0.1.0",
+  "permissions": ["cookies", "storage", "tabs", "clipboardRead", "clipboardWrite"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "action": {
+    "default_title": "Cookie Relay",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}

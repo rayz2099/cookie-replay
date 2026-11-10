@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><title>Cookie Relay Preview</title></head>
+<body>
+<script type="module">
+  const markup = await fetch("../popup.html").then((response) => response.text());
+  const page = new DOMParser().parseFromString(markup, "text/html");
+  document.body.innerHTML = page.body.innerHTML;
+  document.querySelector(".brand-icon").src = "../icons/icon.svg";
+  const style = document.createElement("link");
+  style.rel = "stylesheet";
+  style.href = "../styles.css";
+  document.head.append(style);
+
+  const exp = Math.floor(Date.now() / 1000) + 7200;
+  const token = `eyJhbGciOiJIUzI1NiJ9.${btoa(JSON.stringify({ exp }))}.signature`;
+  const cookies = [
+    { name: "auth_token", value: token, domain: "dev.example.com", path: "/", hostOnly: true, secure: true, httpOnly: true, sameSite: "lax", session: false, expirationDate: exp + 3600 },
+    { name: "session_id", value: "123", domain: "dev.example.com", path: "/", hostOnly: true, secure: true, httpOnly: true, sameSite: "lax", session: true },
+    { name: "ui_preference", value: "compact", domain: "dev.example.com", path: "/", hostOnly: true, secure: false, httpOnly: false, sameSite: "lax", session: false, expirationDate: exp + 86400 },
+    { name: "long_cookie_name_for_layout_testing", value: "value", domain: ".example.com", path: "/app", hostOnly: false, secure: true, httpOnly: false, sameSite: "lax", session: true }
+  ];
+  globalThis.chrome = {
+    tabs: { query: async () => [{ id: 1, url: "https://dev.example.com/app" }] },
+    cookies: {
+      getAllCookieStores: async () => [{ id: "0", tabIds: [1] }],
+      getAll: async () => cookies,
+      set: async (details) => details,
+      remove: async (details) => details
+    },
+    storage: { local: {
+      get: async () => ({ profiles: [{ id: "one", name: "本地调试登录态", snapshot: { name: "本地调试登录态", source: "dev.example.com", createdAt: new Date().toISOString(), cookies } }] }),
+      set: async () => {}
+    } }
+  };
+  await import("../popup.js");
+  if (location.hash === "#saved") document.querySelector('[data-view="saved"]').click();
+</script>
+</body>
+</html>

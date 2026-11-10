@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cookie Relay</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><img class="brand-icon" src="icons/icon.svg" alt=""><span>Cookie Relay</span></div>
+      <span class="topbar-label">DEV TOOL</span>
+    </header>
+
+    <section class="site-band" aria-label="当前站点">
+      <div class="site-avatar" id="site-avatar">•</div>
+      <div class="site-copy">
+        <span class="eyebrow">当前标签页</span>
+        <strong id="site-host">正在读取…</strong>
+      </div>
+      <span class="site-count" id="site-count">—</span>
+    </section>
+
+    <nav class="tabs" aria-label="功能视图">
+      <button type="button" class="tab active" data-view="current">当前 Cookie</button>
+      <button type="button" class="tab" data-view="saved">已保存 <span id="saved-count">0</span></button>
+      <button type="button" class="tab" data-view="import">导入</button>
+    </nav>
+
+    <main>
+      <section id="current-view" class="view active" aria-labelledby="current-title">
+        <div class="section-heading">
+          <div><h1 id="current-title">站点 Cookie</h1></div>
+          <button type="button" class="text-button" id="refresh-button">刷新</button>
+        </div>
+        <div class="list-tools">
+          <label class="check-label"><input type="checkbox" id="select-all" checked><span>全选</span></label>
+          <input type="search" id="cookie-search" placeholder="搜索名称" aria-label="搜索 Cookie 名称">
+        </div>
+        <div id="cookie-list" class="cookie-list"></div>
+        <div class="action-dock">
+          <div class="selection-line"><strong id="selected-count">0</strong> 项已选择</div>
+          <div class="action-row">
+            <input type="text" id="snapshot-name" maxlength="48" placeholder="快照名称，例如 本地登录态" aria-label="快照名称">
+            <button type="button" class="button secondary" id="save-button">保存</button>
+          </div>
+          <button type="button" class="button primary wide" id="copy-button">复制 JSON 到剪贴板</button>
+        </div>
+      </section>
+
+      <section id="saved-view" class="view" aria-labelledby="saved-title">
+        <div class="section-heading"><div><h1 id="saved-title">已保存快照</h1></div></div>
+        <div class="saved-tools"><input type="search" id="saved-search" placeholder="搜索快照或来源域名" aria-label="搜索快照"></div>
+        <div id="saved-list" class="saved-list"></div>
+      </section>
+
+      <section id="import-view" class="view" aria-labelledby="import-title">
+        <div class="section-heading"><div><h1 id="import-title">导入 Cookie</h1></div></div>
+        <div class="target-line"><span>目标域名</span><strong id="target-host">—</strong></div>
+        <label class="field-label" for="json-input">快照 JSON</label>
+        <textarea id="json-input" spellcheck="false" placeholder="Cookie Relay JSON"></textarea>
+        <div class="input-actions">
+          <button type="button" class="button secondary" id="paste-button">读取剪贴板</button>
+          <button type="button" class="button secondary" id="preview-button">预览导入</button>
+        </div>
+        <div id="preview-panel" class="preview-panel hidden">
+          <div class="preview-heading"><strong id="preview-title">导入预览</strong><span id="preview-count"></span></div>
+          <div class="policy" role="radiogroup" aria-label="同名 Cookie 处理方式">
+            <label><input type="radio" name="policy" value="skip" checked><span>同名跳过</span></label>
+            <label><input type="radio" name="policy" value="overwrite"><span>同名覆盖</span></label>
+          </div>
+          <p class="preview-note" id="preview-note"></p>
+          <div id="preview-list" class="preview-list"></div>
+          <button type="button" class="button primary wide import-button" id="import-button">导入到当前站点</button>
+        </div>
+      </section>
+    </main>
+    <div id="notice" class="notice hidden" role="status" aria-live="polite"></div>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

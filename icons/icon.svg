@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">Cookie Relay</title>
+  <rect width="128" height="128" rx="26" fill="#15765d"/>
+  <path d="M94 22c-3 5-2 11 2 15 3 3 7 4 11 4-2 5-1 10 2 13 2 3 5 4 8 5v5c0 30-24 54-54 54S9 94 9 64 33 10 63 10c12 0 23 4 31 12Z" fill="#f5c879"/>
+  <path d="M94 22c-3 5-2 11 2 15 3 3 7 4 11 4-2 5-1 10 2 13 2 3 5 4 8 5v5c0 30-24 54-54 54S9 94 9 64 33 10 63 10c12 0 23 4 31 12Z" fill="none" stroke="#fce7ae" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="43" cy="38" r="6" fill="#7d4b34"/>
+  <circle cx="71" cy="30" r="4" fill="#7d4b34"/>
+  <circle cx="80" cy="65" r="7" fill="#7d4b34"/>
+  <circle cx="39" cy="73" r="5" fill="#7d4b34"/>
+  <circle cx="64" cy="96" r="5" fill="#7d4b34"/>
+</svg>
